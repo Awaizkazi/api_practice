@@ -17,14 +17,18 @@ class ApiPracticeExample extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(snapshot.data![index]['title']),
-                      subtitle: Text(snapshot.data![index]['body']),
-                    );
-                  });
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(snapshot.data![index]['title']),
+                    subtitle: Text(snapshot.data![index]['body']),
+                  );
+                },
+              );
+            } else if (snapshot.hasError) {
+              return Text('${snapshot.error}');
             }
+            return CircularProgressIndicator();
           },
         ),
       ),
